@@ -3,15 +3,72 @@
 // End Page: header text, score, input area for initials, submit button
 // Answer Text: shows "correct" or "incorrect"
 // High Score Page: header text, list of scores, button to return to Start Page, button to clear high scores
+var startButton = document.querySelector("#start-button");
+var heading = document.querySelector("#box-header");
+var boxText = document.querySelector("#box-text");
+var list = document.querySelector("#list");
+var timer = document.querySelector("#cd");
+
+var optCorrect = document.createElement("li");
+var opt1 = document.createElement("li");
+var opt2 = document.createElement("li");
+var opt3 = document.createElement("li");
+
+var state = startButton.getAttribute("data-state");
 
 // When user opens application
     // Start Page is presented
 
 // When start button is clicked
+    // Timer begins
     // Start Page is removed
     // Question #1 page is presented
-    // Timer begins
 
+
+function beginQuiz(event) {
+    event.preventDefault();
+    console.log("Start Button Clicked");
+
+    countdown();
+
+    heading.textContent = "Question 1";
+    boxText.textContent = "First Quiz Question";
+
+    optCorrect.textContent = "Correct Answer";
+    list.appendChild(optCorrect);
+    opt1.textContent = "Option 1";
+    list.appendChild(opt1);
+    opt2.textContent = "Option 2";
+    list.appendChild(opt2);
+    opt3.textContent = "Option 3";
+    list.appendChild(opt3);
+
+    if (state === "visible") {
+        startButton.setAttribute("data-state", "hidden");
+        startButton.setAttribute("style", "background-color: white; color: white; border: white; cursor: auto;")
+    }
+
+}
+
+function countdown() {
+    var quizTime = 60;
+
+    var timeInt = setInterval(function () {
+        if (quizTime > 1) {
+            timer.textContent = quizTime + " seconds remaining";
+            quizTime--;
+        } else if (quizTime === 1) {
+            timer.textContent = quizTime + " second remaining";
+            quizTime--;
+        } else {
+            timer.textContent = "You're out of time!";
+            clearInterval(timeInt);
+        }
+    }, 1000);
+}
+
+
+startButton.addEventListener("click", beginQuiz);
 // When an answer is clicked
     // Question #1 is removed
     // Question #2 is presented
