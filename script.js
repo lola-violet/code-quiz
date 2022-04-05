@@ -3,55 +3,199 @@
 // End Page: header text, score, input area for initials, submit button
 // Answer Text: shows "correct" or "incorrect"
 // High Score Page: header text, list of scores, button to return to Start Page, button to clear high scores
+
+// Selectors 
+var mainBox = document.querySelector("#main-box");
+var boxContent = document.querySelector("#content");
 var startButton = document.querySelector("#start-button");
 var heading = document.querySelector("#box-header");
 var boxText = document.querySelector("#box-text");
 var list = document.querySelector("#list");
 var timer = document.querySelector("#cd");
+var result = document.querySelector("#result");
+var initialFormEl = document.querySelector("#initial-form");
 
+// Possible Answers
 var optCorrect = document.createElement("li");
 var opt1 = document.createElement("li");
 var opt2 = document.createElement("li");
 var opt3 = document.createElement("li");
 
-var state = startButton.getAttribute("data-state");
+// Initial form
+var initLabel = document.createElement("label");
+initLabel.setAttribute("for", "initials");
+var initInput = document.createElement("input");
+initInput.setAttribute("type", "text");
+initInput.setAttribute("id", "initials");
+initInput.setAttribute("name", "initials");
+var initButton = document.createElement("button");
+initButton.setAttribute("id", "init-button");
 
-// When user opens application
-    // Start Page is presented
 
-// When start button is clicked
-    // Timer begins
-    // Start Page is removed
-    // Question #1 page is presented
+var quizContent = [
+    {
+        question: "question 1",
+        ansCorrect: "correct answer",
+        ans1: "option 1",
+        ans2: "option 2",
+        ans3: "option 3",
+    },
+    {
+        question: "question 2",
+        ansCorrect: "correct answer",
+        ans1: "option 1",
+        ans2: "option 2",
+        ans3: "option 3",
+    },
+    {
+        question: "question 3",
+        ansCorrect: "correct answer",
+        ans1: "option 1",
+        ans2: "option 2",
+        ans3: "option 3",
+    },
+    {
+        question: "question 4",
+        ansCorrect: "correct answer",
+        ans1: "option 1",
+        ans2: "option 2",
+        ans3: "option 3",
+    },
+    {
+        question: "question 5",
+        ansCorrect: "correct answer",
+        ans1: "option 1",
+        ans2: "option 2",
+        ans3: "option 3",
+    },
+]
 
+// Quiz Time
+var quizTime = 60;
 
+// Function for start button
 function beginQuiz(event) {
     event.preventDefault();
     console.log("Start Button Clicked");
 
+    // Start button & heading disappear
+    startButton.setAttribute("style", "display: none;");
+    heading.setAttribute("style", "display: none;");
+
+    // Countdown begins
     countdown();
 
-    heading.textContent = "Question 1";
-    boxText.textContent = "First Quiz Question";
+    // Quiz questions begin
+    q1();
+} 
 
-    optCorrect.textContent = "Correct Answer";
+function q1() {
     list.appendChild(optCorrect);
-    opt1.textContent = "Option 1";
     list.appendChild(opt1);
-    opt2.textContent = "Option 2";
     list.appendChild(opt2);
-    opt3.textContent = "Option 3";
-    list.appendChild(opt3);
-
-    if (state === "visible") {
-        startButton.setAttribute("data-state", "hidden");
-        startButton.setAttribute("style", "background-color: white; color: white; border: white; cursor: auto;")
-    }
-
+    list.appendChild(opt3)
+    
+    var i = 0
+    boxText.textContent = quizContent[i].question;
+    optCorrect.textContent = quizContent[i].ansCorrect;
+    opt1.textContent = quizContent[i].ans1;
+    opt2.textContent = quizContent[i].ans2;
+    opt3.textContent = quizContent[i].ans3;
+    
+    list.addEventListener("click", function answer(event) {
+        event.preventDefault();
+        q2();
+        result.setAttribute("style", "border-top: 2px solid var(--accentText);");
+        if (event.target === optCorrect) {
+            result.textContent = "Correct!"
+        } else {
+            result.textContent = "Incorrect"
+        }    
+    })
 }
 
+function q2() {
+    var i = 1
+    boxText.textContent = quizContent[i].question;
+    optCorrect.textContent = quizContent[i].ansCorrect;
+    opt1.textContent = quizContent[i].ans1;
+    opt2.textContent = quizContent[i].ans2;
+    opt3.textContent = quizContent[i].ans3;
+    
+    list.addEventListener("click", function answer(event) {
+        event.preventDefault();
+        q3();
+        result.setAttribute("style", "border-top: 2px solid var(--accentText);");
+        if (event.target === optCorrect) {
+            result.textContent = "Correct!"
+        } else {
+            result.textContent = "Incorrect"
+        }    
+    })
+}
+
+function q3() {
+    var i = 2
+    boxText.textContent = quizContent[i].question;
+    optCorrect.textContent = quizContent[i].ansCorrect;
+    opt1.textContent = quizContent[i].ans1;
+    opt2.textContent = quizContent[i].ans2;
+    opt3.textContent = quizContent[i].ans3;
+    
+    list.addEventListener("click", function answer(event) {
+        event.preventDefault();
+        q4();
+        result.setAttribute("style", "border-top: 2px solid var(--accentText);");
+        if (event.target === optCorrect) {
+            result.textContent = "Correct!"
+        } else {
+            result.textContent = "Incorrect"
+        }    
+    })
+}
+
+function q4() {
+    var i = 3
+    boxText.textContent = quizContent[i].question;
+    optCorrect.textContent = quizContent[i].ansCorrect;
+    opt1.textContent = quizContent[i].ans1;
+    opt2.textContent = quizContent[i].ans2;
+    opt3.textContent = quizContent[i].ans3;
+    
+    list.addEventListener("click", function answer(event) {
+        event.preventDefault();
+        q5();
+        result.setAttribute("style", "border-top: 2px solid var(--accentText);");
+        if (event.target === optCorrect) {
+            result.textContent = "Correct!"
+        } else {
+            result.textContent = "Incorrect"
+        }    
+    })
+}
+
+function q5() {
+    var i = 4
+    boxText.textContent = quizContent[i].question;
+    optCorrect.textContent = quizContent[i].ansCorrect;
+    opt1.textContent = quizContent[i].ans1;
+    opt2.textContent = quizContent[i].ans2;
+    opt3.textContent = quizContent[i].ans3;
+    
+    list.addEventListener("click", function answer(event) {
+        event.preventDefault();
+        endQuiz();
+        result.setAttribute("style", "border-top: 2px solid var(--accentText);");
+        if (event.target === optCorrect) {
+            result.textContent = "Correct!"
+        } else {
+            result.textContent = "Incorrect"
+        }    
+    })
+}
+
+// Function for timer
 function countdown() {
-    var quizTime = 60;
 
     var timeInt = setInterval(function () {
         if (quizTime > 1) {
@@ -67,8 +211,35 @@ function countdown() {
     }, 1000);
 }
 
+function endQuiz() {
+    heading.removeAttribute("style", "display: none;");
+    heading.textContent = "Quiz Complete";
+
+    list.setAttribute("style", "display: none;")
+    mainBox.removeChild(result);
+
+    boxText.textContent = "Your final score is ";
+
+    initialFormEl.setAttribute("style", "margin-top: 30px;");
+    initialFormEl.appendChild(initLabel);
+    initLabel.textContent = "Enter your initials: ";
+    initialFormEl.appendChild(initInput);
+    initialFormEl.appendChild(initButton);
+    initButton.textContent = "Submit";
+
+}
 
 startButton.addEventListener("click", beginQuiz);
+
+
+// When user opens application
+    // Start Page is presented
+
+// When start button is clicked
+    // Timer begins
+    // Start Page is removed
+    // Question #1 page is presented
+
 // When an answer is clicked
     // Question #1 is removed
     // Question #2 is presented

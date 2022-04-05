@@ -51,23 +51,24 @@ main {
 
 #main-box {
     width: 600px;
-    height: 400px;
+    min-height: 300px;
     border: 2px solid black;
     border-radius: 10px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 #box-header {
     text-align: center;
     color: var(--accentText);
-    margin-bottom: 20px;
 }
 
 #box-text {
+    margin-top: 20px;
+    margin-bottom: 10px;
     text-align: center;
     color: black;
 }
@@ -106,4 +107,32 @@ main {
 #start-button:hover {
     background-color: var(--hover);
     cursor: pointer;
+}
+
+#initial-form {
+    margin-top: 20px;
+}
+
+#init-button {
+    background-color: var(--accentColor);
+    border-radius: 10px;
+    color: black;
+    font-size: small;
+    padding: 3px;
+    margin: 5px;
+}
+
+#init-button:hover {
+    background-color: var(--hover);
+    cursor: pointer;
+}
+
+#result {
+    color: var(--accentText);
+    font-size: large;
+    font-weight: 100;
+    margin-bottom: 20px;
+    width: 400px;
+    padding-top: 10px;
+    text-align: center;
 }
