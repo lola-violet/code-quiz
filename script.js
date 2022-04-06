@@ -5,23 +5,25 @@
 // High Score Page: header text, list of scores, button to return to Start Page, button to clear high scores
 
 // Selectors 
+var startButton = document.querySelector("#start-button");
 var mainBox = document.querySelector("#main-box");
 var boxContent = document.querySelector("#content");
-var startButton = document.querySelector("#start-button");
 var heading = document.querySelector("#box-header");
 var boxText = document.querySelector("#box-text");
 var list = document.querySelector("#list");
 var timer = document.querySelector("#cd");
+var vhsButton = document.querySelector("vhs");
 var result = document.querySelector("#result");
 var initialFormEl = document.querySelector("#initial-form");
+var scoreViewEl = document.querySelector("#score-view");
 
-// Possible Answers
+// Quiz Answer Elements
 var optCorrect = document.createElement("li");
 var opt1 = document.createElement("li");
 var opt2 = document.createElement("li");
 var opt3 = document.createElement("li");
 
-// Initial form
+// Initial form Elements
 var initLabel = document.createElement("label");
 initLabel.setAttribute("for", "initials");
 var initInput = document.createElement("input");
@@ -31,53 +33,61 @@ initInput.setAttribute("name", "initials");
 var initButton = document.createElement("button");
 initButton.setAttribute("id", "init-button");
 
+// High Scores Page Elements
+var backButton = document.createElement("button");
+backButton.setAttribute("id", "back-button");
+var clearButton = document.createElement("button");
+clearButton.setAttribute("id", "clear-button");
 
+// Quiz Questions
 var quizContent = [
     {
-        question: "question 1",
-        ansCorrect: "correct answer",
-        ans1: "option 1",
-        ans2: "option 2",
-        ans3: "option 3",
+        question: "Each season of America's Next Top Model is known as a _________.",
+        ansCorrect: "cycle",
+        ans1: "season",
+        ans2: "round",
+        ans3: "session",
     },
     {
-        question: "question 2",
-        ansCorrect: "correct answer",
-        ans1: "option 1",
-        ans2: "option 2",
-        ans3: "option 3",
+        question: "Which celebrity has NOT been a judge on America's Next Top Model?",
+        ansCorrect: "Gisele Bündchen",
+        ans1: "Nigel Barker",
+        ans2: "Janice Dickinson",
+        ans3: "André Leon Talley",
     },
     {
-        question: "question 3",
-        ansCorrect: "correct answer",
-        ans1: "option 1",
-        ans2: "option 2",
-        ans3: "option 3",
+        question: "The premiere of America's Next Top Model was released in _________.",
+        ansCorrect: "2003",
+        ans1: "2007",
+        ans2: "2001",
+        ans3: "2005",
     },
     {
-        question: "question 4",
-        ansCorrect: "correct answer",
-        ans1: "option 1",
-        ans2: "option 2",
-        ans3: "option 3",
+        question: "Mister J is the creative director, but Miss J is the _________.",
+        ansCorrect: "runway diva coach extraordinaire",
+        ans1: "noted fashion photographer",
+        ans2: "Czech model, actress, and author",
+        ans3: "former editor-at-large for Elle",
     },
     {
-        question: "question 5",
-        ansCorrect: "correct answer",
-        ans1: "option 1",
-        ans2: "option 2",
-        ans3: "option 3",
+        question: "On cycle 5, which contestant stole Bre's cereal bar?",
+        ansCorrect: "Lisa",
+        ans1: "Ebony",
+        ans2: "Ashley",
+        ans3: "Nicole",
     },
 ]
+var quizData = [];
 
 // Quiz Time
-var quizTime = 60;
+var quizTime = 59;
+var timeInt;
+var endTime;
 
 // Function for start button
 function beginQuiz(event) {
     event.preventDefault();
-    console.log("Start Button Clicked");
-
+    console.log("start button");
     // Start button & heading disappear
     startButton.setAttribute("style", "display: none;");
     heading.setAttribute("style", "display: none;");
@@ -90,10 +100,11 @@ function beginQuiz(event) {
 } 
 
 function q1() {
-    list.appendChild(optCorrect);
+    
     list.appendChild(opt1);
     list.appendChild(opt2);
-    list.appendChild(opt3)
+    list.appendChild(opt3);
+    list.appendChild(optCorrect);
     
     var i = 0
     boxText.textContent = quizContent[i].question;
@@ -107,10 +118,11 @@ function q1() {
         q2();
         result.setAttribute("style", "border-top: 2px solid var(--accentText);");
         if (event.target === optCorrect) {
-            result.textContent = "Correct!"
+            result.textContent = "correct!"
         } else {
-            result.textContent = "Incorrect"
-        }    
+            result.textContent = "incorrect"
+            quizTime = quizTime-10;
+        }
     })
 }
 
@@ -127,9 +139,10 @@ function q2() {
         q3();
         result.setAttribute("style", "border-top: 2px solid var(--accentText);");
         if (event.target === optCorrect) {
-            result.textContent = "Correct!"
+            result.textContent = "correct!"
         } else {
-            result.textContent = "Incorrect"
+            result.textContent = "incorrect"
+            quizTime = quizTime-10;
         }    
     })
 }
@@ -147,10 +160,11 @@ function q3() {
         q4();
         result.setAttribute("style", "border-top: 2px solid var(--accentText);");
         if (event.target === optCorrect) {
-            result.textContent = "Correct!"
+            result.textContent = "correct!"
         } else {
-            result.textContent = "Incorrect"
-        }    
+            result.textContent = "incorrect"
+            quizTime = quizTime-10;
+        }   
     })
 }
 
@@ -167,10 +181,11 @@ function q4() {
         q5();
         result.setAttribute("style", "border-top: 2px solid var(--accentText);");
         if (event.target === optCorrect) {
-            result.textContent = "Correct!"
+            result.textContent = "correct!"
         } else {
-            result.textContent = "Incorrect"
-        }    
+            result.textContent = "incorrect"
+            quizTime = quizTime-10;
+        }
     })
 }
 
@@ -187,17 +202,18 @@ function q5() {
         endQuiz();
         result.setAttribute("style", "border-top: 2px solid var(--accentText);");
         if (event.target === optCorrect) {
-            result.textContent = "Correct!"
+            result.textContent = "correct!"
         } else {
-            result.textContent = "Incorrect"
-        }    
+            result.textContent = "incorrect"
+            quizTime = quizTime-10;
+        }  
     })
 }
 
-// Function for timer
+// Timer function
 function countdown() {
-
-    var timeInt = setInterval(function () {
+    // Time interval & attached text
+    timeInt = setInterval(function () {
         if (quizTime > 1) {
             timer.textContent = quizTime + " seconds remaining";
             quizTime--;
@@ -207,30 +223,91 @@ function countdown() {
         } else {
             timer.textContent = "You're out of time!";
             clearInterval(timeInt);
+            // Run end quiz function if time runs out before last question is finished
+            endQuiz();
         }
     }, 1000);
 }
 
+
 function endQuiz() {
+    // Show heading
     heading.removeAttribute("style", "display: none;");
     heading.textContent = "Quiz Complete";
-
+    // Remove answer list & display end time
     list.setAttribute("style", "display: none;")
     mainBox.removeChild(result);
 
-    boxText.textContent = "Your final score is ";
+    if (quizTime <= 0) {
+        boxText.textContent = "Your final score is 0";
+        endTime = 0;
+    } else {
+        endTime = quizTime + 1;
+        boxText.textContent = "Your final score is " + endTime;
+    }
 
+    // Show form for user initials
     initialFormEl.setAttribute("style", "margin-top: 30px;");
     initialFormEl.appendChild(initLabel);
     initLabel.textContent = "Enter your initials: ";
     initialFormEl.appendChild(initInput);
     initialFormEl.appendChild(initButton);
     initButton.textContent = "Submit";
+    // Stop timer if last question is completed before time runs out
+    clearInterval(timeInt);
+    // Listen for click event on the submit button
+    initButton.addEventListener("click", submit);
+}
+
+function submit() {
+
+    var userScore = {
+        user: initInput.value,
+        score: endTime
+    }
+
+    localStorage.setItem("data", JSON.stringify(quizData.concat(userScore)));
+    // Change heading text
+    heading.textContent = "High Scores";
+    // Remove form for initials & other text within box
+    initialFormEl.setAttribute("style", "display: none;");
+    boxContent.removeChild(boxText);
+
+    // Show back button & clear button
+    scoreViewEl.appendChild(backButton);
+    backButton.textContent = "Go Back";
+    scoreViewEl.appendChild(clearButton);
+    clearButton.textContent = "Clear High Scores";
+
+    
 
 }
 
-startButton.addEventListener("click", beginQuiz);
+// function renderScores() {
+//     var 
+// }
 
+function goBack() {
+    location.reload();
+}
+
+function clearHighScores() {
+    localStorage.clear();
+}
+
+
+startButton.addEventListener("click", beginQuiz);
+backButton.addEventListener("click", goBack);
+clearButton.addEventListener("click", clearHighScores);
+// vhsButton.addEventListener("click", ______)
+
+
+
+// Save Array in Local Storage
+// localStorage.setItem("scores", JSON.stringify(userScore));
+
+// localStorage.setItem("user", userInit);
+// localStorage.setItem("score", quizTime);
 
 // When user opens application
     // Start Page is presented

@@ -105,7 +105,7 @@ main {
 }
 
 #start-button:hover {
-    background-color: var(--hover);
+    background-color: var(--darkHover);
     cursor: pointer;
 }
 
@@ -113,6 +113,8 @@ main {
     margin-top: 20px;
 }
 
+#back-button,
+#clear-button,
 #init-button {
     background-color: var(--accentColor);
     border-radius: 10px;
@@ -122,10 +124,13 @@ main {
     margin: 5px;
 }
 
+#back-button:hover,
+#clear-button:hover,
 #init-button:hover {
-    background-color: var(--hover);
+    background-color: var(--darkHover);
     cursor: pointer;
 }
+
 
 #result {
     color: var(--accentText);
