@@ -6,7 +6,7 @@ This application is a trivia quiz about Tyra Banks's iconic reality show America
 <br>
 
 ## DEPLOYED APPLICATION
-
+[ANTM Quiz](https://lola-violet.github.io/code-quiz/)
 <br>
 
 ## USAGE
