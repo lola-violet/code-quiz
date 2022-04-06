@@ -18,4 +18,3 @@ The quiz is complete when the user completes the last question or when the timer
 ![question_page](/images/question_page.png)
 ![answer_indicated](/images/answer_indicated.png)
 ![quiz_complete](/images/quiz_complete.png)
-![high_scores]()

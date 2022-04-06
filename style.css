@@ -79,6 +79,7 @@ main {
     list-style: none;
 }
 
+#score-list li,
 #list li {
     background-color: var(--answerColor);
     color: white;

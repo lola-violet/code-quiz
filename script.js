@@ -1,9 +1,3 @@
-// Start Page: quiz name, description, start button
-// Question: quiz question, list of possible answers
-// End Page: header text, score, input area for initials, submit button
-// Answer Text: shows "correct" or "incorrect"
-// High Score Page: header text, list of scores, button to return to Start Page, button to clear high scores
-
 // Selectors 
 var startButton = document.querySelector("#start-button");
 var mainBox = document.querySelector("#main-box");
@@ -38,6 +32,8 @@ var backButton = document.createElement("button");
 backButton.setAttribute("id", "back-button");
 var clearButton = document.createElement("button");
 clearButton.setAttribute("id", "clear-button");
+var scoreList = document.querySelector("#score-list");
+var scorelistItem = document.createElement("li");
 
 // Quiz Questions
 var quizContent = [
@@ -77,7 +73,7 @@ var quizContent = [
         ans3: "Nicole",
     },
 ]
-var quizData = [];
+
 
 // Quiz Time
 var quizTime = 59;
@@ -265,7 +261,7 @@ function submit() {
         user: initInput.value,
         score: endTime
     }
-
+    var quizData = []
     localStorage.setItem("data", JSON.stringify(quizData.concat(userScore)));
     // Change heading text
     heading.textContent = "High Scores";
@@ -273,14 +269,15 @@ function submit() {
     initialFormEl.setAttribute("style", "display: none;");
     boxContent.removeChild(boxText);
 
+    scoreList.appendChild(scorelistItem);
+
+    var listText = JSON.parse(localStorage.getItem("data"));
+    scorelistItem.textContent = listText;
     // Show back button & clear button
     scoreViewEl.appendChild(backButton);
     backButton.textContent = "Go Back";
     scoreViewEl.appendChild(clearButton);
     clearButton.textContent = "Clear High Scores";
-
-    
-
 }
 
 // function renderScores() {
@@ -300,46 +297,4 @@ startButton.addEventListener("click", beginQuiz);
 backButton.addEventListener("click", goBack);
 clearButton.addEventListener("click", clearHighScores);
 // vhsButton.addEventListener("click", ______)
-
-
-
-// Save Array in Local Storage
-// localStorage.setItem("scores", JSON.stringify(userScore));
-
-// localStorage.setItem("user", userInit);
-// localStorage.setItem("score", quizTime);
-
-// When user opens application
-    // Start Page is presented
-
-// When start button is clicked
-    // Timer begins
-    // Start Page is removed
-    // Question #1 page is presented
-
-// When an answer is clicked
-    // Question #1 is removed
-    // Question #2 is presented
-    // Answer Text is presented, with "correct" or "incorrect"
-        // If incorrect, time is removed from the timer
-    
-// When all questions are answered OR when time runs out
-    // Question is removed
-    // Answer Text is removed
-    // End Page is presented
-    // Score is presented (score = time left)
-    // User enters initials and clicks submit
-        // User initials & score are saved locally
-
-// When submit is clicked
-    // End Page is removed
-    // High Score Page is presented
-    // Scores are pulled from local file & shown in a list
-
-// When 'Clear High Scores' button is clicked
-    // Previous scores are removed from list
-
-// When 'Go Back' button is clicked
-    // High Score page is removed
-    // Start Page is presented
 
